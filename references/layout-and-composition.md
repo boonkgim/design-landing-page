@@ -59,6 +59,30 @@ Vary deliberately:
   quote, a full-width image, a dark band in a light page) creates a landmark and makes the
   page memorable.
 
+## The moves you have to ask for
+
+Everything in a spacing, radius and colour scale describes a rectangle sitting straight.
+No scale has a step for character, so an agent left to itself ships a plain rounded
+rectangle every time. If a direction is supposed to have edge, the expressive moves have
+to be named explicitly in the DESIGN.md, with values, or they will not appear:
+
+- **Rotation.** A slight `transform: rotate(-2deg)` on a card, photo or badge, so an
+  element sits like something placed by hand rather than laid out by a grid.
+- **Hard shadow.** An offset solid shadow (`box-shadow: 4px 4px 0` in an ink colour)
+  instead of a soft blur. Reads as print, sticker or poster rather than as elevation.
+- **Slanted section edges.** A `clip-path` polygon that ends a band on a diagonal rather
+  than a horizontal, so sections interlock instead of stacking.
+- **Wobble.** An asymmetric multi-value radius
+  (`border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px`) for a hand-drawn,
+  marker-outline feel.
+- **Directional shapes.** `clip-path` arrows, notches and tabs, so a step, a callout or a
+  price tag has a direction rather than being a box.
+
+Use them sparingly and systematically: pick one or two, apply them consistently to the
+same kind of element, and record the exact values as component tokens. Sprinkled at random
+they read as noise; applied consistently they become the thing that makes a direction
+recognisable.
+
 ## Composition is part of a direction's distinctness
 
 When producing several directions to compare, assign each a **different hero archetype

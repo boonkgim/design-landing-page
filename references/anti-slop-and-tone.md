@@ -104,7 +104,31 @@ are in **Hard rules** below.
     evidence guidance in `conversion-brief-and-copy.md`.
 12. **A decorative numbered "Step 1 / 2 / 3" graphic** that does not depict the product's
     real flow, or that exists where nothing needed explaining.
-13. **Decoration with no informational job**, in any medium, plus low-contrast text that
+13. **Body copy set in a muted grey.** Muted is a semantic, not a softener: it marks text
+    that *qualifies* something else, a caption, a timestamp, a unit, a disabled state. When
+    the main paragraph of a section is muted, the page quietly says none of its content is
+    primary, and the whole thing reads washed out no matter how good the palette is. Body
+    copy takes the full ink colour; earn quietness with size and space instead.
+14. **Body copy shipped one step down the scale.** The sibling of the above: paragraphs set
+    at the small step (`text-sm`, 14px and below) because it looks tidier in a cramped
+    layout. One generated design run counted 101 small-text call sites and not a single
+    base one. Body is the base step, and if a layout only works with shrunken text, the
+    layout is wrong.
+15. **Cards inside cards.** A bordered or filled card containing another bordered or filled
+    card, usually because two groupings were solved independently. Flatten it: keep the
+    outer container and separate the inner items with space and a rule.
+16. **The hero metric wall.** A row of three or four big numbers under the hero
+    ("10k+ users, 99.9% uptime, 4.9 rating") used as visual furniture. Beyond the fabricated
+    numbers problem, it fills the most valuable space on the page with figures a visitor
+    cannot act on. One number that supports the promise beats four that decorate it.
+17. **Over-rounded corners.** Radius reaching for 24px and beyond on ordinary content cards
+    makes a page read as a toy regardless of the palette. Cards generally want 12 to 16px.
+    Large radii are a deliberate signature, not a default.
+18. **Grid lines and dot fields as decoration.** Background grids, blueprint rules and
+    dotted fields applied for texture rather than to align or measure anything. If the
+    lines do not correspond to the layout's real grid, they are noise pretending to be
+    structure.
+19. **Decoration with no informational job**, in any medium, plus low-contrast text that
     fails WCAG AA. This is explicitly *not* a ban on any imagery type: real photography,
     AI-generated photography, illustration and product demos are all legitimate and
     encouraged when chosen deliberately (see `images-and-icons.md`). What is banned is the

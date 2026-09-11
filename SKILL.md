@@ -23,6 +23,7 @@ and point subagents at them by absolute path instead of pasting their contents:
 |---|---|
 | `references/conversion-brief-and-copy.md` | Steps 1-3 (argument, structure, copy) |
 | `references/layout-and-composition.md` | Step 4 (hero archetype, section rhythm, distinctness) |
+| `references/craft-values.md` | Steps 4, 6, 7 (type scale, colour, spacing, borders, shadows, radius, motion) |
 | `references/images-and-icons.md` | Step 5 (choosing and sourcing imagery, icon system) |
 | `references/design-md-format.md` | Step 6 (writing DESIGN.md) |
 | `references/anti-slop-and-tone.md` | Steps 5-8 (guardrails, tone, hard rules, audit) |
@@ -92,10 +93,27 @@ The direction follows from the audience and the message, not from taste. A page 
 to cautious enterprise buyers and a page selling a weekend bootcamp should not look
 alike even if both are "clean and modern."
 
+**Climb the ladder from vibe to direction.** A *vibe* is an adjective ("clean", "modern",
+"premium") and decides nothing. A *style* is a named tradition with known rules: Swiss
+typographic, editorial, Bauhaus, web brutalism, terminal, Japanese minimalism, mid-century
+modern, Scandinavian functional, art deco, Memphis. A *direction* is **a style plus what it
+refuses**, and that refusal is what makes it produce consistent decisions on screens you
+have not designed yet. A mood board is what you end up with when nothing was committed to.
+Name the style, then write its refusals: "Swiss typographic, refusing decorative imagery,
+gradients, and any colour beyond ink, paper and one red." A longer style catalogue lives in
+the sibling `design-frontend` skill at `reference/directions.md` if you want more range than
+the ten above.
+
 Commit to specifics: palette with real values, a type pairing with real faces and a
 reason, density and layout rhythm, shape language, elevation model, and how the page
 feels at the top of the funnel versus at the offer. "Human," "modern," or "premium" are
 outcomes of layout, content, imagery, and voice, never of palette alone.
+
+Take the concrete values from `references/craft-values.md` rather than improvising them:
+the type scale and its real steps, the spacing set, measure, density, the border kinds and
+their jobs, the shadow and radius ladders, the OKLCH palette shapes, and the motion
+durations. Depart from any of them deliberately and say why in the DESIGN.md; what is not
+allowed is never having named them.
 
 **Decide the hero composition explicitly**, before any building, using the archetypes in
 `references/layout-and-composition.md`. Ask what the page's strongest asset is (the

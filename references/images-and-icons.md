@@ -54,20 +54,42 @@ anchor images.
 
 **AI-generated photography or illustration.** Legitimate and often better than stock when
 you need a specific scene. Check for an available image-generation skill (for example a
-Cloudflare Workers AI generator) and its credentials before promising this route. Prompt
-deliberately and concretely for the scene the page actually needs, describing subject,
-setting, composition, lighting and mood, then review the output and regenerate rather
-than shipping a flawed frame. Generation cost is real, so confirm with the user before
-committing to a route that generates many assets.
+Cloudflare Workers AI generator) and its credentials before promising this route.
+Generation cost is real, so confirm before committing to a route that needs many assets.
+
+Four techniques decide whether a generated set looks designed or looks generated:
+
+- **Name the marks, not the register.** "Visible crosshatching and stippled shading"
+  produces a consistent look; "editorial illustration" produces a different interpretation
+  every run. Describe the physical marks, materials, and rendering (brush, halftone, riso
+  misregistration, flat vector with no gradients, 3D clay render with soft shadows), not
+  the vibe word for the category.
+- **Hold a fixed block and vary one line.** Write one prompt block covering framing,
+  lighting, background and palette, reuse it verbatim for every asset in the set, and
+  change only the subject line. Consistency across a set comes from what stays identical.
+- **Normalise subject scale.** Left to itself a model reframes every subject, so a set
+  comes back at wildly different crops. State the subject's share of the frame (around 56
+  to 60 percent is a reliable band for a single object) rather than trusting the model's
+  framing.
+- **Use explicit negatives, and do not mix models.** Name what must not appear (text,
+  watermarks, extra limbs, lens flare, drop shadows). Generate the whole set with one
+  model: two models in one set will not share a look however carefully each is prompted.
+
+Then look at every frame and regenerate the flawed ones rather than shipping them.
 
 **Illustration from a library.** When a committed style is wanted and generation is not
 available, use one consistent open-licensed illustration set rather than assembling
 mismatched assets. One source, one style, one palette treatment.
 
-**Hand-built SVG.** Agents build *geometric, diagrammatic and interface* SVG well:
-abstract shape compositions, isometric blocks, charts, annotated diagrams, and accurate
-replicas of product UI built from HTML and CSS. Agents build *organic freehand figures*
-badly. Use hand-built SVG for the former and never for the latter.
+**Hand-built SVG, narrowly.** The reliable rule is **real assets, or none**: no clip art,
+and no hand-coded *scenes*. A scene means anything depicting people, places or objects,
+which is where freehand vector work falls apart and takes the page's credibility with it.
+
+What is still safe to build by hand is the non-pictorial half: accurate replicas of product
+UI (best built in HTML and CSS rather than SVG), charts and annotated diagrams, and purely
+geometric or abstract compositions that are honest about being shapes rather than
+pretending to depict something. If a hand-built graphic is trying to look like a picture,
+it needs to be a real asset instead.
 
 **Product / screen demos.** Usually best built as real HTML and CSS rather than an image:
 a faithful, styled replica of the product's interface, using the page's own tokens,

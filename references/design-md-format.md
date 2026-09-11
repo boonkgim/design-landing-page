@@ -85,21 +85,27 @@ All `##` headings, in this order. A landing page build should carry all of them.
    instead.
 6. **Shapes** - the corner-radius language and its rationale, plus any other shape
    signature (cuts, seams, framing, how images are cropped or masked).
-7. **Images** *(extension)* - the imagery type chosen for this direction and why it fits
-   (real photography, AI-generated photography, illustration in a named style, product or
-   screen demo, diagram, or a deliberately image-light treatment), the treatment that makes
-   assets read as one system (crop ratios, colour grade, framing), where images appear, and
-   what each one depicts and tells the reader. See `images-and-icons.md`.
-8. **Icons** *(extension)* - the icon system: style, stroke width, size scale, filled or
-   outline, and a meaning table mapping product concepts to icons. Inline SVG only, never
-   emoji. State where icons are *not* used, since the common failure is decorative icon
-   tiles filling a slot rather than carrying meaning.
-9. **Components** - per-component guidance: buttons and their variants, cards, badges and
+7. **Components** - per-component guidance: buttons and their variants, cards, badges and
    status chips, form inputs, accordions, navigation, plus whatever this product needs.
    Cover states, not just resting appearance. **For every container type, say what defines
    it** (fill, elevation, border, spacing alone) rather than assuming a border, and say how
    the offer's container is deliberately distinguished from supporting ones.
-10. **Do's and Don'ts** - concrete guardrails for this system ("the accent colour appears
+8. **Motion** *(extension)* - what moves, how far, how fast, and on what easing. Cover the
+   kinds in play (micro-interactions on hover and press, state changes, enter and exit,
+   loading, anything scroll-linked), the primitives allowed (fade, short slide, slight
+   zoom, spin), and the durations and easing curve, with real values from
+   `craft-values.md`. Say what deliberately does not move. A page with no motion section
+   gets either nothing or a different animation per component.
+9. **Images** *(extension)* - the imagery type chosen for this direction and why it fits
+   (real photography, AI-generated photography, illustration in a named style, product or
+   screen demo, diagram, or a deliberately image-light treatment), the treatment that makes
+   assets read as one system (crop ratios, colour grade, framing), where images appear, and
+   what each one depicts and tells the reader. See `images-and-icons.md`.
+10. **Icons** *(extension)* - the icon system: style, stroke width, size scale, filled or
+   outline, and a meaning table mapping product concepts to icons. Inline SVG only, never
+   emoji. State where icons are *not* used, since the common failure is decorative icon
+   tiles filling a slot rather than carrying meaning.
+11. **Do's and Don'ts** - concrete guardrails for this system ("the accent colour appears
     once per screen"), ending with the `### AI Slop Guardrails` subsection from
     `anti-slop-and-tone.md`.
 
