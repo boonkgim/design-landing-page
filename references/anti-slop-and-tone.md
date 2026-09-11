@@ -49,21 +49,26 @@ are in **Hard rules** below.
    convention and is fine; so is a sharp-edged callout, and so is an edge colour that
    encodes real state across a set (error, warning, success) when documented as doing so.
    Judge the combination, not the single property.
-7. **A hairline-bordered rounded card around everything.** When every group on the page
-   gets the same recipe (tinted surface, 1px grey border, same radius, same padding), the
-   page stops having a hierarchy: the offer, a bio, a list of outcomes and a footnote all
-   read as equally important, and the layout is doing no work. Separate with the cheapest
-   thing that works, escalating only when it does not: **whitespace first**, then a
-   **surface tone shift**, then **soft elevation**, and a **border last**, when it is
-   genuinely carrying meaning.
+7. **Defining every card with a 1px hairline border.** Cards are fine. Grouping content
+   into cards is often the right call, especially for the offer. The tell is the reflex
+   that a card *is* `surface + 1px border + radius`, applied to every group on the page,
+   in any border colour, not just grey. When the recipe never varies, the offer, a bio, a
+   list of outcomes and a footnote all carry identical visual weight and the layout stops
+   expressing any hierarchy.
 
-   Borders are not the problem; reflexive boxing is. A border earns its place on discrete
-   interactive or selectable units (the offer cards a visitor chooses between), on inputs
-   and controls, on image frames, and in systems whose visual language is deliberately
-   hairline-based and committed to throughout. If a card's border can be deleted and
-   nothing about the page gets harder to read, it was a default, not a decision. Reserving
-   the boxed treatment for one thing (usually the offer) also buys that thing prominence
-   for free.
+   A card can be defined by several things, and the hairline should not be the automatic
+   answer: a **surface tone shift** (a white card on a tinted page, or a sunken fill on a
+   light one) often separates on its own and makes an added border redundant; **soft
+   elevation** does it while signalling interactivity; **spacing and type hierarchy** alone
+   are frequently enough; a **solid colour block** does it emphatically. A border is one
+   legitimate option among these, not the default, and it works best when the system has
+   deliberately committed to a hairline language throughout, or when it is carrying real
+   meaning such as a selected or error state.
+
+   Two practical checks. If a card sits on a differently-toned background *and* has a
+   hairline, the hairline is usually doing nothing: delete it and see. And if every card
+   on the page shares one recipe, vary it deliberately so that the section you most want
+   chosen reads as the most prominent.
 8. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
    not merely discouraged, regardless of case or size. If the supporting context matters,
    fold it into the heading itself, either as a smaller lead-in line inside the same
@@ -126,13 +131,14 @@ Mechanical, run across every finished page:
 grep -o '—' index.html | wc -l                  # em dashes, expect 0
 grep -c 'class="eyebrow' index.html             # eyebrow labels, expect 0 (check equivalents too)
 grep -n 'border-left:[[:space:]]*[2-9]' index.html   # edge stripes: review each hit, see tell #6
-grep -c 'border:1px solid' index.html                # boxing: a high count suggests tell #7
+grep -c 'border:1px solid' index.html                # hairline-defined cards: see tell #7
 ```
 
 The first two are pass/fail. The last two only surface candidates for judgment: check
 whether each stripe hit is the rounded-card-plus-accent-stripe pattern or a legitimate
-plain left rule, and whether a high border count means every group has been boxed by
-default or reflects a deliberate hairline-based system. Leave the legitimate ones alone.
+plain left rule, and whether a high hairline count means cards are being defined by border
+reflexively (especially where a tone shift already separates them) or reflects a system
+deliberately committed to a hairline language. Leave the legitimate ones alone.
 
 plus: extract every `<h1>`/`<h2>` and the paragraph after the hero heading and word-count
 them; confirm base body font size; diff every colour, face and radius in the CSS against
