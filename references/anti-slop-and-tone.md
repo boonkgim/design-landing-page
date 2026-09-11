@@ -30,18 +30,25 @@ verbatim.
    when actually chosen and justified in the Typography section.
 5. **A meaningless badge or pill above the hero headline** ("✨ New", "AI-Powered") that
    carries no information.
-6. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
+6. **A coloured stripe along a card's left or top edge**, in any colour: the 3-4px accent
+   bar on a quote card, callout, feature card or alert. It is one of the most recognisable
+   auto-generated card treatments, it usually spends the brand's accent colour on
+   decoration rather than on an action, and it is almost always covering for a card that
+   was not designed. Separate and emphasise with type, space, a full hairline border, or a
+   surface shift instead. A colour-coded edge is defensible only when the colour encodes
+   real state across a set (error, warning, success) and is documented as doing so.
+7. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
    not merely discouraged, regardless of case or size. If the supporting context matters,
    fold it into the heading itself, either as a smaller lead-in line inside the same
    heading element or as a colon-joined clause ("Who's teaching this: two instructors, no
    filler bios"). The pattern is doubly bad when the label is set too small to read
    comfortably, which is the usual case.
-7. **Emoji standing in for icons**, instead of the documented inline-SVG icon system.
-8. **Fabricated stat banners and trust numbers** the product does not have. See the
+8. **Emoji standing in for icons**, instead of the documented inline-SVG icon system.
+9. **Fabricated stat banners and trust numbers** the product does not have. See the
    evidence guidance in `conversion-brief-and-copy.md`.
-9. **A decorative numbered "Step 1 / 2 / 3" graphic** that does not depict the product's
-   real flow, or that exists where nothing needed explaining.
-10. **Decoration with no informational job**, in any medium, plus low-contrast text that
+10. **A decorative numbered "Step 1 / 2 / 3" graphic** that does not depict the product's
+    real flow, or that exists where nothing needed explaining.
+11. **Decoration with no informational job**, in any medium, plus low-contrast text that
     fails WCAG AA. This is explicitly *not* a ban on any imagery type: real photography,
     AI-generated photography, illustration and product demos are all legitimate and
     encouraged when chosen deliberately (see `images-and-icons.md`). What is banned is the
@@ -89,8 +96,10 @@ without hedging it. Confidence without exaggeration is the register.
 Mechanical, run across every finished page:
 
 ```
-grep -o '—' index.html | wc -l                  # expect 0
-grep -c 'class="eyebrow' index.html             # expect 0, also check for equivalents
+grep -o '—' index.html | wc -l                  # em dashes, expect 0
+grep -c 'class="eyebrow' index.html             # eyebrow labels, expect 0 (check equivalents too)
+grep -n 'border-left:[[:space:]]*[2-9]' index.html   # accent edge stripes, expect none
+grep -n 'border-top:[[:space:]]*[3-9]px' index.html  # top-edge variant, expect none
 ```
 
 plus: extract every `<h1>`/`<h2>` and the paragraph after the hero heading and word-count
