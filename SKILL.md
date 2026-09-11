@@ -1,165 +1,194 @@
 ---
 name: design-landing-page
-description: Generate multiple distinct, high-conversion landing page designs for a product from its PRD or brief - each documented as a DESIGN.md (Google's open-source Stitch spec) and built as a self-contained HTML mock with real photography, run through a shared anti-AI-slop and anti-Claudish-tone audit before being handed back. Use when the user asks to design a landing page, mock up landing page options, create marketing page designs, or wants several visual directions to compare for a product's main marketing page. Invoke as /design-landing-page.
+description: Design a high-conversion landing page from a brief, PRD, or rough notes - reasoning like a senior designer who is also marketing and sales aware. Derives the conversion argument and copy first, then the section structure, then a committed visual direction (palette, type, layout, images, icons), records every decision in a DESIGN.md (Google's open-source Stitch spec, extended with Images and Icons sections), and builds it as a self-contained HTML page good enough to visualise the finished product. Produces one direction or several distinct ones to compare. Use when asked to design a landing page, a marketing page, a product page, a sales page, or to propose visual directions for one. Invoke as /design-landing-page.
 ---
 
 # Design landing page
 
-Produce several genuinely distinct landing page design directions for a product, each
-a real `DESIGN.md` plus a self-contained `index.html`, good enough that the user can
-actually visualize the finished product rather than a wireframe. This skill exists
-because plain "design me 3 versions" attempts converge on the same palette, lean on
-crude hand-drawn illustration, and read as AI-written both visually (gradients, glow,
-eyebrow labels, emoji icons) and in copy (em dashes, "not just X, it's Y," reflexive
-"actually/real," corporate-consultant words). Every step below exists to prevent one of
-those specific, previously-observed failures.
+You are acting as a senior designer who is also marketing and sales aware. That means
+two things that most "make me a landing page" attempts skip:
 
-Two reference files carry the detail so this file stays a workflow, not a spec dump:
+1. **The page is an argument, not a layout.** Its job is to move one specific visitor
+   from where they are to one specific action. The structure, the copy, and the visual
+   system all serve that argument. Decide the argument first.
+2. **Every decision is deliberate and recorded.** Palette, type, density, shape, imagery
+   type, icon style: each is chosen for a reason tied to the audience and the message,
+   and written down in `DESIGN.md` so a human or another agent can carry it forward.
+   DESIGN.md is a record of design decisions, not a visual style mandate.
 
-- `references/design-md-format.md` - the exact DESIGN.md schema and section order.
-- `references/anti-slop-and-tone.md` - the visual and copy guardrail checklist, and the
-  word-count/accessibility rules.
-- `references/photo-sourcing.md` - how to source real imagery instead of illustration.
+Detail lives in four reference files. Read the one you need at the step that needs it,
+and point subagents at them by absolute path instead of pasting their contents:
 
-Point subagents at these files by path (they're plain files on disk) rather than
-pasting their contents into every prompt.
+| File | Read it at |
+|---|---|
+| `references/conversion-brief-and-copy.md` | Steps 1-3 (argument, structure, copy) |
+| `references/images-and-icons.md` | Step 5 (choosing and sourcing imagery, icon system) |
+| `references/design-md-format.md` | Step 6 (writing DESIGN.md) |
+| `references/anti-slop-and-tone.md` | Steps 5-8 (guardrails, tone, hard rules, audit) |
 
-## Step 1: Read the source material
+## Step 1: Extract the conversion brief
 
-Read the PRD or brief in full before doing anything else. Everything downstream, the
-outcome section's specific claims, the evidence section's honest framing, the
-how-it-works steps, the FAQ answers, must be traceable to something this document
-actually says. Note in particular:
+Read the brief, PRD, or notes in full. If the input is thin, ask for what's missing
+rather than inventing it. Pull out, explicitly, before designing anything (see
+`references/conversion-brief-and-copy.md` for how to interrogate each):
 
-- The real user journey (how someone actually goes from landing on the page to
-  completing the core action), for the "how it works" section.
-- The real business rules (cancellation policy, pricing rules, what's in vs. out of
-  scope), for the FAQ.
-- Whether the product is pre-launch with no track record yet (affects the Evidence
-  section, see `anti-slop-and-tone.md`).
-- The target audience's technical comfort level and device mix (affects tone and
-  mobile-responsiveness priority).
+- **Who** the visitor is, what they already believe, and how aware they are of the
+  problem, the category, and this product. Awareness level decides how much the hero has
+  to teach before it can sell.
+- **The one action** the page must produce. A page with two co-equal goals converts on
+  neither.
+- **The promise**: the outcome the visitor gets, in their language, not the product's.
+- **The mechanism**: why the promise is believable, the thing that makes it work.
+- **The proof that genuinely exists.** Some products are pre-launch and have no numbers.
+  That constrains the evidence section honestly, it does not license inventing stats.
+- **The top objections** in the visitor's head, in their own words, and what defuses each.
+- **Commitment and risk**: price, effort, what happens after they act, what reverses the
+  risk.
+- **Constraints**: brand assets, locale, currency, timezone, device mix, regulatory
+  wording, anything already decided.
 
-## Step 2: Confirm scope with the user
+Everything downstream must trace to something in this brief. If a claim, a step, or an
+FAQ answer cannot be traced back, it is invented and does not ship.
 
-Don't assume. Ask (a single `AskUserQuestion` call covers this in one round-trip):
+## Step 2: Write the argument before the pixels
 
-- **Which page(s)?** Default assumption, absent other instruction: one full landing
-  page containing, in this order: **Hero** (benefit-first, not feature-first), **Outcome
-  / Benefit** (concrete, specific things a user gets, not vague claims), **Evidence**,
-  **the product's core functional section** (a schedule, a feature grid, a pricing
-  table, whatever the product's main "here's the actual thing" content is),
-  **Why us / How it works** (mapped to the real journey from step 1), **FAQ** (real
-  objections from step 1), **Closing CTA** (specific, not a repeat of the hero CTA). If
-  the user only wants one specific screen (e.g. just a dashboard mock), confirm that
-  instead of building the full seven-section structure.
-- **How many directions?** Default to 3 if unspecified. More than 4-5 in one batch
-  makes the convergence problem in Step 4 harder to avoid and burns a lot of tokens for
-  marginal comparison value.
-- **Imagery approach.** Offer the options in `photo-sourcing.md` (curated stock,
-  AI-generated, illustration) and let the user pick; default to curated stock
-  photography if they have no preference, it's the most reliable path to something that
-  looks like a real, finished product.
-- **Any hard constraints?** Palette exclusions (e.g. "not cream," "not dark mode"),
-  brand colors that must appear, anything the user already knows they don't want.
+Draft the conversion argument as plain sentences first, no layout, no styling: the
+promise, the proof, the objection handling, the ask. If that sequence is not persuasive
+as plain text, no visual treatment will rescue it. This draft is also the source of the
+page's real copy, which is a first-class deliverable, not filler text under a design.
 
-## Step 3: Assign genuinely distinct creative directions
+Copy rules, in full in `references/conversion-brief-and-copy.md`: specific over vague,
+customer language over product language, benefit before feature, concrete and true over
+impressive and hollow, and a marketer's voice rather than an AI assistant's.
 
-This is the step that fails silently if rushed. Giving N subagents an identical brief
-plus "pick your own creative direction" reliably produces N designs that converge on
-the same palette family and type pairing (observed failure: three separate agents told
-to pick their own direction all independently landed on warm terracotta/cream tones
-with a serif display face). Prevent this by deciding the directions yourself, up front,
-before writing any subagent prompt, with concrete, mutually opposed anchors:
+## Step 3: Derive the section structure from the argument
 
-- A specific palette **territory** per direction (not just "your choice"): e.g. one
-  direction anchored on a fully saturated dominant color, one on a cool neutral
-  crisp-white base, one on a warm editorial cream, one on a dark ink surface. Never let
-  two directions in the same batch share a palette family.
-- A specific type **pairing philosophy** per direction: e.g. one condensed bold display
-  face, one elegant high-contrast serif, one single geometric sans across all weights.
-  Explicitly forbid whichever faces already got used in a prior round of this same
-  project (track this across sessions if redoing a rejected batch).
-- A specific **mood/energy** word per direction that's a real contrast to its siblings
-  (bold and energetic vs. restrained and premium vs. calm and minimal), not near-synonyms.
-- If this is a redo after a rejected batch, name the earlier rejection explicitly in
-  each new prompt (what was tried, what the client said was wrong) so the new batch
-  doesn't quietly repeat it.
+The default high-conversion sequence, each section doing one job in the funnel:
 
-## Step 4: Source imagery
+1. **Hero** - the promise, who it is for, and the primary CTA. Answers "what is this,
+   for whom, why care" in about five seconds.
+2. **Outcome / benefit** - makes the promise concrete. Specific, tangible things the
+   visitor walks away with.
+3. **Evidence** - makes it believable, with proof that actually exists.
+4. **The offer** - the real thing being bought: the schedule, the pricing table, the
+   product list, the plan comparison, with the details a decision needs. This is where
+   conversion happens, and it is the section most often under-designed.
+5. **Why us / how it works** - the mechanism and the risk reduction, mapped to the real
+   journey from the brief, not a decorative three-step graphic.
+6. **FAQ** - kills the remaining objections from Step 1, in the visitor's own words,
+   answered truthfully against the brief's real rules.
+7. **Closing CTA** - restates the promise and names the specific next step (the actual
+   next available date, the actual starting plan), never a generic repeat of the hero.
 
-Follow `references/photo-sourcing.md` for whichever option was chosen in Step 2. If
-using curated stock, do the search-and-visual-review yourself (or via a `fork` if you
-want to keep the raw search noise out of your own context) **before** writing subagent
-prompts, then hand each subagent its own pre-verified, pre-vetted URL set. Give each
-direction a different suggested hero image where plausible, identical photo pools
-across siblings undercut the "genuinely distinct" goal from Step 3 even when the
-palette differs.
+Plus a header with a persistent CTA and a footer. Adapt deliberately: a product-aware
+audience may want the offer above the evidence; a complex product may need a dedicated
+mechanism section; a single-SKU product may fold the offer into the hero. Say why when
+you deviate.
 
-## Step 5: Launch one subagent per direction, in parallel
+## Step 4: Choose the visual direction(s)
 
-Use the `Agent` tool, one call per direction, all in a single message so they run
-concurrently. Each is a **fresh agent with zero context of this conversation**, so its
-prompt must be fully self-contained: the product summary from Step 1, the exact section
-list from Step 2, its assigned concrete direction from Step 3, its photo assignment
-from Step 4, and explicit pointers (by absolute path) to
-`references/design-md-format.md` and `references/anti-slop-and-tone.md` for it to read
-and follow. Ask each subagent to:
+The direction follows from the audience and the message, not from taste. A page selling
+to cautious enterprise buyers and a page selling a weekend bootcamp should not look
+alike even if both are "clean and modern."
 
-1. Read the two reference files and the source PRD/brief.
-2. Write `DESIGN.md` in the assigned direction, following the reference format exactly,
-   including the `Imagery`, `Icons`, and `AI Slop Guardrails` sections.
-3. Build `index.html`: one self-contained file, every section from Step 2, real inline
-   SVG icons (never emoji), the assigned photography, a working sign-in/state toggle if
-   the product has a personalization concept worth demonstrating, mobile-responsive to
-   ~390px.
-4. **Self-audit before finishing**: grep its own HTML for em dashes and confirm zero,
-   confirm no separate eyebrow-label element exists anywhere, check every heading and
-   hero subhead against the word-count limits in `anti-slop-and-tone.md`, diff every
-   color/font/radius value used against the DESIGN.md token list and fix any drift,
-   verify every image URL still returns 200, check text contrast against its background
-   for WCAG AA.
-5. Save both files under a per-direction folder, e.g.
-   `design/<nn>-<short-slug>/{DESIGN.md,index.html}`.
-6. Report back concisely: what was built, the two file paths, and explicit confirmation
-   of the self-audit results (should not paste full file contents).
+Commit to specifics: palette with real values, a type pairing with real faces and a
+reason, density and layout rhythm, shape language, elevation model, and how the page
+feels at the top of the funnel versus at the offer. "Human," "modern," or "premium" are
+outcomes of layout, content, imagery, and voice, never of palette alone.
 
-## Step 6: Independently re-audit every direction yourself
+**If the user wants several directions to compare** (ask how many, default 3 when they
+say "some options"), assign each direction concrete, mutually opposed anchors *yourself*
+before writing any prompt. Giving N subagents the same brief plus "pick your own
+direction" reliably produces N near-identical designs: in the project this skill came
+from, three independently briefed agents all landed on warm cream palettes with the same
+serif. Prevent it by fixing, per direction:
 
-Don't trust the self-audit report alone, subagents miss things, especially when the
-prompt itself introduced repeated phrasing (if you wrote "the real schedule" in three
-separate prompts, expect three separate designs to independently produce "the real,
-actually bookable schedule"). After all subagents report back, run a mechanical sweep
-across every finished `index.html`:
+- a distinct palette territory (no two directions in the same family, and none in a
+  family the user already rejected),
+- a distinct type philosophy and specific faces, excluding any face already used in an
+  earlier round of the same project,
+- a distinct mood that genuinely contrasts with its siblings rather than being a synonym,
+- a distinct layout logic (editorial grid vs. asymmetric energy vs. single-column calm),
+- and, where it makes sense, a different imagery type per Step 5.
 
-- Em dash count (`grep -o '—' file | wc -l`), must be zero.
-- Eyebrow markup count (`grep -c 'class="eyebrow"' file` or similar), must be zero.
-- Extract every `<h1>`/`<h2>` and the paragraph immediately after the hero `<h1>`,
-  word-count them, flag anything over the limits in `anti-slop-and-tone.md`.
-- Re-verify every image URL still returns 200.
-- Spot-check a handful of headlines and body copy against the Claudish-tone list.
+## Step 5: Choose the imagery type and the icon system
 
-Fix mechanical, unambiguous issues yourself directly (em dash replacement, eyebrow
-folding, trimming an over-long headline) rather than round-tripping through a subagent
-for every small thing, it's faster and the changes are objective. For anything requiring
-real design judgment across the whole batch (a systemic issue like every direction
-having the same problem), send one message per affected subagent (resume it by name/id,
-it has full context of what it built) rather than starting fresh agents, unless the
-change is substantial enough that a fresh, focused brief is clearer.
+Imagery is a design decision with several legitimate answers, chosen per direction:
+real photography, AI-generated photography, illustration in a committed named style
+(flat, line drawing, isometric, 3D render, abstract, Memphis, editorial collage), a
+product or screen demo, a diagram, or a deliberately image-light typographic treatment.
+Pick the one that actually serves this product, audience, and direction. Do not default
+to one type across every direction, and do not carry a previous project's answer into a
+new one.
 
-## Step 7: Hand it back
+`references/images-and-icons.md` has the decision framework, what each type is good and
+bad at, the quality bar and sourcing route for each (stock CDN, AI generation, asset
+libraries, hand-built SVG for the things agents build well), and the icon system rules.
+Two rules hold regardless of type: every image must carry information the page needs,
+and the execution must be good enough that the viewer can visualise the finished
+product. Crude freehand figures fail that bar; a well-chosen photo, a competent
+geometric illustration, or an accurate screen replica all pass it.
 
-Open every finished `index.html` for the user (`xdg-open` on Linux, `open` on macOS) so
-they can review real rendered pages, not just a file listing. Summarize each direction
-in one line (palette/mood, not implementation detail). Expect iteration: palette
-rejections, tone complaints, requests for more directions with a specific constraint
-(as happened when a client asked for "2 more, just not cream"), a request to fix one
-specific issue across the whole batch. Treat each round the same way as Steps 3-6:
-decide concrete new anchors before dispatching, re-run the same audit on the result.
+## Step 6: Record the decisions in DESIGN.md
 
-## What this skill does not do
+Write `DESIGN.md` per `references/design-md-format.md`: YAML token frontmatter, then the
+prose sections in order, including the `Images` and `Icons` sections and closing with
+Do's and Don'ts plus its `AI Slop Guardrails` subsection from
+`references/anti-slop-and-tone.md`. The prose explains *why*; the tokens are the
+normative values the build must match.
 
-It does not decide the product's information architecture beyond the standard landing
-page section list in Step 2, and it does not commit anything to git. It builds
-throwaway-but-real design comps for the user to compare and choose from, not production
-code.
+## Step 7: Build the page
+
+One self-contained `index.html` per direction, implementing exactly the tokens and rules
+in its own DESIGN.md. Every section from Step 3 with the real copy from Step 2, real
+inline SVG icons, the Step 5 imagery, working interactive states where they demonstrate
+something real about the product (a plan toggle, a signed-in price, an FAQ accordion),
+responsive down to ~390px, and body text at 16px or larger.
+
+Save per direction as `design/<nn>-<slug>/{DESIGN.md,index.html}`.
+
+**For multiple directions, run one subagent per direction, launched in parallel in a
+single message.** Each is a fresh agent with no context, so its prompt must be
+self-contained: the Step 1 brief, the Step 2 argument and copy direction, the Step 3
+section list, its assigned Step 4 anchors, its Step 5 imagery assignment with any
+pre-verified asset URLs, and absolute paths to the reference files to read. Require each
+to self-audit (Step 8) before reporting back, and to report only a summary and file
+paths rather than pasting files.
+
+## Step 8: Audit, then look at it
+
+Never trust a subagent's self-audit alone, and never trust your own build unexamined.
+Run the mechanical sweep across every finished page (the full checklist, with the reasons
+behind each rule, is in `references/anti-slop-and-tone.md`):
+
+- zero em dashes anywhere in the copy,
+- zero separate eyebrow-label elements above headings,
+- headings within the word-count limit, hero and section leads within theirs,
+- base body text 16px or larger,
+- every colour, face, radius and icon style traceable to a DESIGN.md token, no drift,
+- every image asset resolving, with real alt text,
+- contrast passing WCAG AA,
+- no emoji standing in for icons,
+- copy free of the AI-tone tells.
+
+Fix mechanical issues directly, they are objective and faster to correct than to
+delegate. Send judgment-level or systemic issues back to the subagent that built the
+page, which still has full context.
+
+Then **actually open the pages** (`xdg-open` on Linux, `open` on macOS) and look at them
+rendered, at desktop and narrow widths. A page can pass every grep and still be ugly,
+unbalanced, or unconvincing.
+
+## Step 9: Present and iterate
+
+Summarise each direction in a line about its argument and mood, not its implementation.
+Expect real iteration: a rejected palette family, a tone complaint, "give me two more but
+not X," a single fix applied across every direction. Each round repeats Steps 4-8:
+decide new concrete anchors first, rebuild, re-audit, re-open. Carry forward what earlier
+rounds ruled out so a later round cannot quietly reintroduce it.
+
+## Scope
+
+This skill designs and mocks pages: it produces DESIGN.md decision records and
+self-contained HTML comps for a human to judge, not production components, and it does
+not commit anything to git.

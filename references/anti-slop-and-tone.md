@@ -1,110 +1,103 @@
-# Anti-slop guardrails and copy tone
+# Guardrails: visual slop, copy tone, and the hard rules
 
-Every design direction this skill produces must be audited against this checklist
-before it's considered done, both by the subagent that built it (self-audit) and by a
-mechanical re-check afterward (see `SKILL.md` step 6). These rules exist because they
-are exactly the tells that make an AI-generated design or AI-written copy read as
-generic, and because a real client rejected earlier rounds for them.
+Every design this skill produces is audited against this file, first by whoever built it,
+then independently. These are not stylistic opinions; each one is a specific tell that
+makes a design or its copy read as machine-generated, and each was caught in real review.
 
-## The 10 AI-generated-UI tells (visual)
+## The governing rule
 
-Ban all of these, worded in the specific design system's own vocabulary, not just
-copy-pasted:
+**No element that serves no purpose.** Every element on the page must carry information
+tied to the product's real content, or enable a real user action. If an element can be
+deleted and the page loses neither meaning nor function, it was decoration and it goes.
+Apply this to imagery, icons, badges, dividers, labels, stat rows, and whole sections.
 
-1. Generic purple-to-cyan or lavender "AI startup" gradients used as decoration rather
-   than a documented brand color.
-2. Glassmorphism plus a neon glow or colored box-shadow halo, added for decoration
-   rather than tied to a documented elevation model. A saturated or dark-surface system
-   is exactly where this creeps in, watch it closely there.
-3. Rows of 3 or 6 identical icon-over-heading "feature cards" carrying generic,
-   interchangeable copy that isn't real product content.
-4. Reflexive use of Inter, Space Grotesk, or Geist (or an italic-serif-accent-word
-   cliché) as an unexamined default rather than a deliberate, documented type choice.
-5. A meaningless badge or pill sitting above a hero headline ("✨ New", "AI-Powered")
-   that carries no real information.
-6. **Any separate "eyebrow" label element above a heading, at any size.** This is banned
-   outright, not just discouraged, regardless of whether it's all-caps or not, regardless
-   of size. If a heading's supporting context is genuinely important, fold it directly
-   into the heading itself, either as a smaller lead-in line inside the same `<h1>`/`<h2>`
-   element, or as a colon-joined clause ("Who's teaching this: two instructors, no filler
-   bios"). Never a separate labeled tag element.
-7. Emoji used as icons anywhere in the UI, instead of the documented inline-SVG icon
-   system.
-8. Fake or unsourced stat banners and trust numbers ("10,000+ learners", "99%
-   satisfaction") that the product doesn't actually have. See "Evidence for pre-launch
-   products" below.
-9. A generic numbered "Step 1 / Step 2 / Step 3, how it works" graphic added reflexively
-   when the real flow doesn't need explaining, or where the steps are decorative filler
-   rather than the product's actual, specific flow.
-10. Decorative-only imagery that cannot be tied to a real page purpose (a random
-    handshake photo, an unrelated abstract 3D blob), and low-contrast dark-mode-by-default
-    body text that fails WCAG AA. This does **not** mean stock or AI-generated photography
-    is banned: well-chosen, deliberately-treated real photography that depicts something
-    true about the product is encouraged. The ban is specifically on generic filler with
-    no connection to the section's content.
+Every DESIGN.md ends its Do's and Don'ts with an `### AI Slop Guardrails` subsection
+restating this rule and the bans below in that system's own vocabulary, not copied
+verbatim.
 
-State the system's own governing rule too: every element on the page must serve a real
-purpose tied to actual product data or a real user action described in the source brief,
-never a purely decorative element that could be deleted without losing information or
-function.
+## The visual tells
 
-## Hard rules, not style preferences
+1. **Generic purple-to-cyan or lavender "AI startup" gradients** used as decoration
+   rather than as a documented brand colour.
+2. **Glassmorphism plus neon glow or coloured box-shadow halos** applied for atmosphere
+   rather than following a documented elevation model. Dark and saturated surfaces are
+   where this creeps in hardest.
+3. **Rows of three or six identical icon-over-heading cards** carrying generic,
+   interchangeable copy. The pattern is not banned; the interchangeable filler content in
+   it is. If the four cards could belong to any product, they belong to none.
+4. **Reflexive default typefaces.** Inter, Space Grotesk and Geist chosen because they
+   are the obvious answer, or the italic-serif-accent-word cliché. Any of these is fine
+   when actually chosen and justified in the Typography section.
+5. **A meaningless badge or pill above the hero headline** ("✨ New", "AI-Powered") that
+   carries no information.
+6. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
+   not merely discouraged, regardless of case or size. If the supporting context matters,
+   fold it into the heading itself, either as a smaller lead-in line inside the same
+   heading element or as a colon-joined clause ("Who's teaching this: two instructors, no
+   filler bios"). The pattern is doubly bad when the label is set too small to read
+   comfortably, which is the usual case.
+7. **Emoji standing in for icons**, instead of the documented inline-SVG icon system.
+8. **Fabricated stat banners and trust numbers** the product does not have. See the
+   evidence guidance in `conversion-brief-and-copy.md`.
+9. **A decorative numbered "Step 1 / 2 / 3" graphic** that does not depict the product's
+   real flow, or that exists where nothing needed explaining.
+10. **Decoration with no informational job**, in any medium, plus low-contrast text that
+    fails WCAG AA. This is explicitly *not* a ban on any imagery type: real photography,
+    AI-generated photography, illustration and product demos are all legitimate and
+    encouraged when chosen deliberately (see `images-and-icons.md`). What is banned is the
+    unrelated handshake photo, the abstract blob behind the headline, the stock scene that
+    contradicts the audience, and imagery so crudely executed that it stops the viewer
+    believing in the finished product.
 
-- **No em dash anywhere, in any copy.** Not in headlines, body copy, captions, alt text,
-  quotes, footers, anything. Use a comma, a period (new sentence), or parentheses
-  instead. Grep the finished HTML and DESIGN.md for `—` and confirm zero before calling
-  the work done.
-- **Base body paragraph text is 16px or larger, everywhere.** This is a modern-web
-  accessibility baseline, not a style choice. Small text is fine for genuine micro-UI (a
-  badge, a timestamp label) but never for the primary reading copy of a paragraph.
-- **Headlines stay at or under ~12 words; subheads (leads) stay at or under ~25-30
-  words.** These are the empirically-supported ranges for landing page conversion copy.
-  If a headline or subhead you drafted runs longer, cut it, don't just let it wrap.
+## Hard rules
 
-## Writing tone: like a marketer, not like an AI assistant
+- **No em dash anywhere in any copy.** Not in headlines, body, captions, alt text,
+  quotes or the footer. Use a comma, a full stop, or parentheses. Grep for `—` and expect
+  zero before shipping.
+- **Body text at 16px or larger** for all real reading copy. Smaller sizes are for
+  genuine micro-UI only (badges, timestamps, table labels), never for paragraphs. This is
+  a modern-web accessibility baseline.
+- **Headlines at or under about 12 words; hero subheads and section leads at or under
+  about 25 to 30 words.** Trim, do not wrap.
+- **Contrast passes WCAG AA** for every text-on-background pair, checked rather than
+  assumed, especially on saturated and dark surfaces.
+- **Responsive to ~390px** without horizontal overflow.
 
-Concretely avoid, anywhere in the copy:
+## Copy tone: a marketer, not an AI assistant
 
-- The "not just X, it's Y" / "not only X, but Y" construction, the single most-cited AI
-  writing tell.
-- Reflexive use of **"actually," "real," "genuinely," "truly"** as authenticity-signaling
-  filler. Do not write "the real, bookable schedule" or "who's actually teaching this,"
-  just write "the bookable schedule" / "who's teaching this." If a sentence still reads
-  fine with the word deleted, delete it.
-- Corporate-consultant words: "delve," "leverage," "seamless," "robust," "unlock,"
-  "elevate," "underscore," "holistic," "game-changing," "cutting-edge," "at the end of
-  the day," "it's worth noting," "pave the way," "foster."
-- Reflexive rule-of-three lists used purely for rhythm rather than because there are
-  really three things.
-- Signposting phrases: "let's dive in," "here's the thing," "here's where it gets
-  interesting," "moving on to."
+Avoid, specifically:
 
-Write like an experienced marketer who has shipped real landing page copy: plain,
-specific, varied-length sentences, a little informal confidence, no hedging or
-throat-clearing. Every claim should be something concretely, specifically true about
-this product, never vague ("boost productivity," "AI-powered efficiency").
+- **"Not just X, it's Y"** and its variants ("not only X, but Y", "this isn't about X,
+  it's about Y"), the single most recognisable AI writing structure.
+- **Reflexive "actually", "real", "genuinely", "truly"** used as authenticity signals.
+  "The real, bookable schedule" and "who's actually teaching this" both improve by simply
+  deleting the word. If the sentence survives the deletion, delete it.
+- **Consultant vocabulary**: delve, leverage, seamless, robust, unlock, elevate,
+  underscore, holistic, game-changing, cutting-edge, at the end of the day, it's worth
+  noting, pave the way, foster, navigate (figurative), landscape (figurative).
+- **Rule-of-three lists** written for rhythm when there are really two or five things.
+- **Signposting**: "let's dive in", "here's the thing", "here's where it gets
+  interesting", "moving on to".
+- **Throat-clearing openers**: "In today's fast-moving world", "When it comes to", "At
+  its core".
 
-## Evidence for pre-launch products
+Write plainly and specifically, vary sentence length, and let a declarative sentence land
+without hedging it. Confidence without exaggeration is the register.
 
-Many products this skill will be used for have no track record yet. Never invent fake
-customer counts, star ratings, or "X,000 users served" vanity stats to fill an evidence
-section, that's dishonest, and it's banned tell #8 above regardless. Instead build
-evidence from what an early, real offering can honestly have:
+## The audit
 
-- A specific, plausible bio for whoever's behind the product (real-sounding company
-  names/roles as illustrative sample content are fine, e.g. "spent six years building
-  automation tooling at a logistics company," never a vague "expert").
-- A concrete breakdown of what's actually delivered (a curriculum, a feature list, a
-  process), not a marketing summary of it.
-- Tangible before/after artifacts specific to the product.
-- A testimonial-style quote, if used, is illustrative sample content the same way
-  placeholder product names and prices are elsewhere in the mock, never presented as if
-  it is real collected feedback.
+Mechanical, run across every finished page:
 
-## How-it-works and FAQ must be real
+```
+grep -o '—' index.html | wc -l                  # expect 0
+grep -c 'class="eyebrow' index.html             # expect 0, also check for equivalents
+```
 
-Steps in a "how it works" section must map to the actual user journey described in the
-source brief/PRD, not generic decorative "Step 1: Discover, Step 2: Engage, Step 3:
-Grow" filler. FAQ entries must address real objections grounded in the actual product's
-real business rules (pull them from the brief), never invented answers that contradict
-what the brief actually says.
+plus: extract every `<h1>`/`<h2>` and the paragraph after the hero heading and word-count
+them; confirm base body font size; diff every colour, face and radius in the CSS against
+the DESIGN.md tokens; confirm every image asset resolves and has alt text; check contrast
+pairs; grep the copy for the tone list above.
+
+Then open the page and look at it, at desktop and at ~390px. Every rule here can pass
+while the page is still unbalanced or unconvincing, which is a judgment only looking can
+catch.
