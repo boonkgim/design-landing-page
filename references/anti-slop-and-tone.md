@@ -17,6 +17,12 @@ verbatim.
 
 ## The visual tells
 
+These are patterns to recognise, not properties to ban on sight. Nearly every one of them
+has a legitimate use in the hands of someone who chose it deliberately and can say why;
+what marks them out is being reached for by default, as filler, or as a substitute for a
+decision. Judge the specific combination in context. The genuinely non-negotiable items
+are in **Hard rules** below.
+
 1. **Generic purple-to-cyan or lavender "AI startup" gradients** used as decoration
    rather than as a documented brand colour.
 2. **Glassmorphism plus neon glow or coloured box-shadow halos** applied for atmosphere
@@ -30,13 +36,19 @@ verbatim.
    when actually chosen and justified in the Typography section.
 5. **A meaningless badge or pill above the hero headline** ("✨ New", "AI-Powered") that
    carries no information.
-6. **A coloured stripe along a card's left or top edge**, in any colour: the 3-4px accent
-   bar on a quote card, callout, feature card or alert. It is one of the most recognisable
-   auto-generated card treatments, it usually spends the brand's accent colour on
-   decoration rather than on an action, and it is almost always covering for a card that
-   was not designed. Separate and emphasise with type, space, a full hairline border, or a
-   surface shift instead. A colour-coded edge is defensible only when the colour encodes
-   real state across a set (error, warning, success) and is documented as doing so.
+6. **The rounded card with a coloured left-edge stripe.** The specific combination is the
+   tell: a rounded-corner card, a hairline border or tinted fill, and a 3-4px coloured bar
+   down its left edge, used for a quote, callout or feature. It is one of the most
+   recognisable auto-generated card treatments, it usually spends the brand's accent
+   colour on decoration rather than on an action, and it tends to stand in for a card that
+   was not actually designed. Reach for type, space, a surface shift or a full border
+   instead.
+
+   Do not over-apply this. A coloured or neutral left rule is not banned in itself: a
+   plain blockquote with a left rule and no card around it is a long-standing typographic
+   convention and is fine; so is a sharp-edged callout, and so is an edge colour that
+   encodes real state across a set (error, warning, success) when documented as doing so.
+   Judge the combination, not the single property.
 7. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
    not merely discouraged, regardless of case or size. If the supporting context matters,
    fold it into the heading itself, either as a smaller lead-in line inside the same
@@ -98,9 +110,12 @@ Mechanical, run across every finished page:
 ```
 grep -o '—' index.html | wc -l                  # em dashes, expect 0
 grep -c 'class="eyebrow' index.html             # eyebrow labels, expect 0 (check equivalents too)
-grep -n 'border-left:[[:space:]]*[2-9]' index.html   # accent edge stripes, expect none
-grep -n 'border-top:[[:space:]]*[3-9]px' index.html  # top-edge variant, expect none
+grep -n 'border-left:[[:space:]]*[2-9]' index.html   # edge stripes: review each hit, see tell #6
 ```
+
+The first two are pass/fail. The third only surfaces candidates: check whether each hit is
+the rounded-card-plus-accent-stripe pattern or a legitimate plain left rule, and leave the
+legitimate ones alone.
 
 plus: extract every `<h1>`/`<h2>` and the paragraph after the hero heading and word-count
 them; confirm base body font size; diff every colour, face and radius in the CSS against
