@@ -28,9 +28,25 @@ are in **Hard rules** below.
 2. **Glassmorphism plus neon glow or coloured box-shadow halos** applied for atmosphere
    rather than following a documented elevation model. Dark and saturated surfaces are
    where this creeps in hardest.
-3. **Rows of three or six identical icon-over-heading cards** carrying generic,
-   interchangeable copy. The pattern is not banned; the interchangeable filler content in
-   it is. If the four cards could belong to any product, they belong to none.
+3. **The icon-tile card grid**: a small icon in a tinted rounded square, a bold title
+   under it, a paragraph under that, repeated as three, four or six identical cards. This
+   is the single most recognisable auto-generated section on the web, and unlike most
+   entries here the *layout itself* is the tell, not only the copy inside it.
+
+   The diagnostic is the icon. In this pattern the icon is chosen to fill a slot the
+   template demands rather than to carry meaning, which is why these grids drift to
+   check marks, stars, lightning bolts, generic "people" glyphs, and a calendar standing
+   in for an idea that has nothing to do with dates. If you cannot state what each icon
+   tells the reader that the title does not, the tiles are decoration.
+
+   Better answers, roughly in order of effort: drop the icon tiles and let the titles and
+   spacing carry it, which usually improves the section immediately; put something real in
+   that visual slot instead (a before and after, a number, a screenshot, a sample of the
+   actual output); break the uniformity so the strongest item is larger or framed
+   differently; or use a list, table or editorial layout rather than a grid of equal
+   boxes. Icons are fine when each one is semantically precise, repeated consistently for
+   the same concept elsewhere in the page, and sized as a subordinate cue rather than as
+   the section's visual interest.
 4. **Reflexive default typefaces.** Inter, Space Grotesk and Geist chosen because they
    are the obvious answer, or the italic-serif-accent-word cliché. Any of these is fine
    when actually chosen and justified in the Typography section.
