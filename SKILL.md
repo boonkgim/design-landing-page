@@ -22,6 +22,7 @@ and point subagents at them by absolute path instead of pasting their contents:
 | File | Read it at |
 |---|---|
 | `references/conversion-brief-and-copy.md` | Steps 1-3 (argument, structure, copy) |
+| `references/layout-and-composition.md` | Step 4 (hero archetype, section rhythm, distinctness) |
 | `references/images-and-icons.md` | Step 5 (choosing and sourcing imagery, icon system) |
 | `references/design-md-format.md` | Step 6 (writing DESIGN.md) |
 | `references/anti-slop-and-tone.md` | Steps 5-8 (guardrails, tone, hard rules, audit) |
@@ -96,6 +97,15 @@ reason, density and layout rhythm, shape language, elevation model, and how the 
 feels at the top of the funnel versus at the offer. "Human," "modern," or "premium" are
 outcomes of layout, content, imagery, and voice, never of palette alone.
 
+**Decide the hero composition explicitly**, before any building, using the archetypes in
+`references/layout-and-composition.md`. Ask what the page's strongest asset is (the
+promise, a scene, the product, a transformation, the offer, a person, a number) and build
+the hero around that answer. Left column of copy with a photo on the right is a real
+layout and sometimes the right one, but it is also the layout that arrives when the
+question was never asked, so choose it on purpose or not at all. Decide the section rhythm
+below the fold at the same time, so the page paces rather than repeating one section shape
+all the way down.
+
 **If the user wants several directions to compare** (ask how many, default 3 when they
 say "some options"), assign each direction concrete, mutually opposed anchors *yourself*
 before writing any prompt. Giving N subagents the same brief plus "pick your own
@@ -108,7 +118,11 @@ serif. Prevent it by fixing, per direction:
 - a distinct type philosophy and specific faces, excluding any face already used in an
   earlier round of the same project,
 - a distinct mood that genuinely contrasts with its siblings rather than being a synonym,
-- a distinct layout logic (editorial grid vs. asymmetric energy vs. single-column calm),
+- **a distinct hero archetype and section rhythm**, assigned explicitly per direction from
+  `references/layout-and-composition.md`. This is the anchor most often skipped and the one
+  that matters most: in the project behind this skill, eight directions with deliberately
+  opposed palettes and type all independently produced the same copy-left, photo-right
+  hero, which made them read as one design in eight colourways,
 - and, where it makes sense, a different imagery type per Step 5.
 
 ## Step 5: Choose the imagery type and the icon system

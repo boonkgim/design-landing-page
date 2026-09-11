@@ -50,9 +50,17 @@ are in **Hard rules** below.
 4. **Reflexive default typefaces.** Inter, Space Grotesk and Geist chosen because they
    are the obvious answer, or the italic-serif-accent-word cliché. Any of these is fine
    when actually chosen and justified in the Typography section.
-5. **A meaningless badge or pill above the hero headline** ("✨ New", "AI-Powered") that
+5. **The default split hero**: copy in a left column, a rounded photo in a right column,
+   vertically centred, two CTAs and a meta line beneath. A legitimate layout that becomes
+   a tell through reflex, because it is what gets built when nobody asked what the hero
+   should be. The giveaway across a set of directions is uniformity: if every option opens
+   the same way, the options differ only in colour. Pick the hero from the page's strongest
+   asset instead, using the archetypes in `layout-and-composition.md`, and give competing
+   directions different ones. The same applies below the fold, where every section becoming
+   a centred heading over a grid of equal cards leaves the page with no pacing.
+6. **A meaningless badge or pill above the hero headline** ("✨ New", "AI-Powered") that
    carries no information.
-6. **The rounded card with a coloured left-edge stripe.** The specific combination is the
+7. **The rounded card with a coloured left-edge stripe.** The specific combination is the
    tell: a rounded-corner card, a hairline border or tinted fill, and a 3-4px coloured bar
    down its left edge, used for a quote, callout or feature. It is one of the most
    recognisable auto-generated card treatments, it usually spends the brand's accent
@@ -65,7 +73,7 @@ are in **Hard rules** below.
    convention and is fine; so is a sharp-edged callout, and so is an edge colour that
    encodes real state across a set (error, warning, success) when documented as doing so.
    Judge the combination, not the single property.
-7. **Defining every card with a 1px hairline border.** Cards are fine. Grouping content
+8. **Defining every card with a 1px hairline border.** Cards are fine. Grouping content
    into cards is often the right call, especially for the offer. The tell is the reflex
    that a card *is* `surface + 1px border + radius`, applied to every group on the page,
    in any border colour, not just grey. When the recipe never varies, the offer, a bio, a
@@ -85,18 +93,18 @@ are in **Hard rules** below.
    hairline, the hairline is usually doing nothing: delete it and see. And if every card
    on the page shares one recipe, vary it deliberately so that the section you most want
    chosen reads as the most prominent.
-8. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
+9. **Any separate eyebrow-label element above a heading, at any size.** Banned outright,
    not merely discouraged, regardless of case or size. If the supporting context matters,
    fold it into the heading itself, either as a smaller lead-in line inside the same
    heading element or as a colon-joined clause ("Who's teaching this: two instructors, no
    filler bios"). The pattern is doubly bad when the label is set too small to read
    comfortably, which is the usual case.
-9. **Emoji standing in for icons**, instead of the documented inline-SVG icon system.
-10. **Fabricated stat banners and trust numbers** the product does not have. See the
+10. **Emoji standing in for icons**, instead of the documented inline-SVG icon system.
+11. **Fabricated stat banners and trust numbers** the product does not have. See the
     evidence guidance in `conversion-brief-and-copy.md`.
-11. **A decorative numbered "Step 1 / 2 / 3" graphic** that does not depict the product's
+12. **A decorative numbered "Step 1 / 2 / 3" graphic** that does not depict the product's
     real flow, or that exists where nothing needed explaining.
-12. **Decoration with no informational job**, in any medium, plus low-contrast text that
+13. **Decoration with no informational job**, in any medium, plus low-contrast text that
     fails WCAG AA. This is explicitly *not* a ban on any imagery type: real photography,
     AI-generated photography, illustration and product demos are all legitimate and
     encouraged when chosen deliberately (see `images-and-icons.md`). What is banned is the
@@ -146,8 +154,8 @@ Mechanical, run across every finished page:
 ```
 grep -o '—' index.html | wc -l                  # em dashes, expect 0
 grep -c 'class="eyebrow' index.html             # eyebrow labels, expect 0 (check equivalents too)
-grep -n 'border-left:[[:space:]]*[2-9]' index.html   # edge stripes: review each hit, see tell #6
-grep -c 'border:1px solid' index.html                # hairline-defined cards: see tell #7
+grep -n 'border-left:[[:space:]]*[2-9]' index.html   # edge stripes: review each hit, see tell #7
+grep -c 'border:1px solid' index.html                # hairline-defined cards: see tell #8
 ```
 
 The first two are pass/fail. The last two only surface candidates for judgment: check
